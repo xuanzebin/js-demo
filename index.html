@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>我的导航</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header></header>
+    <main style="background-image: url(./img/wallhaven-630087.jpg)">
+        <div class="mask"></div>
+        <div class="wrapper" id="main">
+            <div class="promptMessage" id="message">提示：该按键没有被编辑任何网址!!</div> 
+        </div>
+    </main>
+    <footer></footer>
+    <script>
+        key = { 
+            '0':{0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
+            '1':{0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
+            '2':{0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
+            'length':3
+        }
+        hash = {
+            'q':'qq.com',
+            'w':'weibo.com',
+            'y':'youtube.com',
+            'j':'jirengu.com',
+            'x':'xiedaimala.com',
+            'l':'lol.qq.com',
+            'h':'imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=8132b0f71fce36d3b6098b73529a50f2/d439b6003af33a8733d74c37cc5c10385343b561.jpg'
+        }
+        hashInLocalStorage=JSON.parse(localStorage.getItem('web')||'null')
+        if (hashInLocalStorage) {
+            hash=hashInLocalStorage
+        }
+        index = 0
+        while (index < key['length']) {
+            div1 = document.createElement('div')
+            main.appendChild(div1)
+            index2 = 0
+            while (index2 < key[index]['length']) {
+                kbd1= document.createElement('kbd')
+                div1.appendChild(kbd1)
+                kbd1.textContent = key[index][index2]
+                kbd1.id=key[index][index2]+key[index][index2]
+                button1= document.createElement('button')
+                button1.id=kbd1.textContent
+                button1.textContent='编辑'
+                kbd1.appendChild(button1)
+                button1.onclick=function(press) {
+                    buttonPress=press.target
+                    websiteNew=prompt('请输入你要编辑的新网址：')
+                    hash[buttonPress.id]=websiteNew
+                    localStorage.setItem('web',JSON.stringify(hash))
+                }
+                index2=index2+1
+            }
+            index=index+1
+        }
+        document.onkeypress=function(inputPress) {
+            x=inputPress.key
+            website=hash[x]
+            if (website!=undefined) {
+                window.open('http://'+website,'_blank')
+            } else {
+                console.log(x+x)
+                document.getElementById(x+x).style="background:white;"
+                message.style="color:black;"
+                setTimeout('document.getElementById(x+x).style="background: linear-gradient(45deg, rgba(192,192,192,1) 0%, rgba(0,0,0,1) 62%, rgba(0,0,0,1) 100%);"',100);
+                setTimeout('message.style="color:transparent;"',2000)
+            }
+        }
+    </script>
+</body>
+</html>

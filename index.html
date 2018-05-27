@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>我的快乐导航</title>
+    <title>肥宅快乐导航</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -44,12 +44,12 @@
 
         function listenToUser(hash) {
             document.onkeypress = function(inputPress) {
-                var x = inputPress.key
+                x = inputPress.key
                 var website = hash[x]
                 if (website != undefined) {
                     window.open('http://' + website,'_blank')
                 } else {
-                    document.getElementById(x + x).style = "background:white;box-shadow: 0px 0px 0px 1px white,0 0 0 2px white;margin-bottom:4px;vertical-align: bottom;"
+                    document.getElementById(x+x).style = "background:white;box-shadow: 0px 0px 0px 1px white,0 0 0 2px white;margin-bottom:4px;vertical-align: bottom;"
                     message.style = "color:black;"
                     setTimeout('document.getElementById(x+x).style="background: linear-gradient(to bottom, #282828 0%,#111111 100%);box-shadow: 0px 0px 0px 1px #1A1B1C,0 0 0 2px #1F2020,0 3px 4px 2px #080808;"',100)
                     setTimeout('message.style="color:transparent;"',2000)
@@ -66,8 +66,13 @@
             var hash = {
                 'q':'qq.com',
                 'w':'weibo.com',
-                'y':'youtube.com',
-                'x':'xiedaimala.com',
+                'y':'yys.163.com/',
+                'x':'x5.qq.com/act/a20180424decennial/index.html?ADTAG=media.buy.baidukeyword.ppc_x5pc_u24337174.k85602435564.a22084836300',
+                'd':'id5.163.com/baidu_mobile_pz/',
+                'g':'www.gamersky.com/',
+                's':'store.steampowered.com/',
+                'b':'www.bh3.com/',
+                'c':'csol.tiancity.com/homepage/v6/',
                 'l':'lol.qq.com'
             }
             var hashInLocalStorage=getFromLocalStorage('web')

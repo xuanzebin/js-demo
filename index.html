@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>我的导航</title>
+    <title>肥宅快乐导航</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -25,49 +25,61 @@
             'q':'qq.com',
             'w':'weibo.com',
             'y':'youtube.com',
-            'j':'jirengu.com',
             'x':'xiedaimala.com',
-            'l':'lol.qq.com',
-            'h':'imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=8132b0f71fce36d3b6098b73529a50f2/d439b6003af33a8733d74c37cc5c10385343b561.jpg'
+            'l':'lol.qq.com'
         }
-        hashInLocalStorage=JSON.parse(localStorage.getItem('web')||'null')
+        hashInLocalStorage = JSON.parse(localStorage.getItem('web')||'null')
         if (hashInLocalStorage) {
-            hash=hashInLocalStorage
+            hash = hashInLocalStorage
         }
         index = 0
         while (index < key['length']) {
-            div1 = document.createElement('div')
-            main.appendChild(div1)
+            div = document.createElement('div')
+            main.appendChild(div)
             index2 = 0
             while (index2 < key[index]['length']) {
-                kbd1= document.createElement('kbd')
-                div1.appendChild(kbd1)
-                kbd1.textContent = key[index][index2]
-                kbd1.id=key[index][index2]+key[index][index2]
-                button1= document.createElement('button')
-                button1.id=kbd1.textContent
-                button1.textContent='编辑'
-                kbd1.appendChild(button1)
-                button1.onclick=function(press) {
-                    buttonPress=press.target
-                    websiteNew=prompt('请输入你要编辑的新网址：')
-                    hash[buttonPress.id]=websiteNew
-                    localStorage.setItem('web',JSON.stringify(hash))
+                kbd = document.createElement('kbd')
+                button = document.createElement('button')
+                span = document.createElement('span')
+                img = document.createElement('img')
+                img.className = "ico"
+                if (hash[key[index][index2]]) {
+                    img.src = "http://" + hash[key[index][index2]] + "/favicon.ico"
+                } else {
+                    img.src = "http://i.loli.net/2017/11/10/5a05afbc5e183.png"
                 }
-                index2=index2+1
+                span.textContent = key[index][index2]
+                kbd.id = key[index][index2]+key[index][index2]
+                button.id = key[index][index2]
+                img.id = 'img' + button.id
+                button.textContent = '编辑'
+                button.onclick = function(press) {
+                    buttonPress = press.target
+                    keys = buttonPress.id
+                    websiteNew = prompt('请输入你要编辑的新网址：')
+                    hash[keys] = websiteNew
+                    localStorage.setItem('web',JSON.stringify(hash))
+                    if (hash[keys]) {
+                        document.getElementById('img'+keys).src = "http://" + hash[keys] + "/favicon.ico"
+                    }
+                }
+                kbd.appendChild(img)
+                kbd.appendChild(button) 
+                kbd.appendChild(span)
+                div.appendChild(kbd)
+                index2 = index2+1
             }
-            index=index+1
+            index = index+1
         }
-        document.onkeypress=function(inputPress) {
-            x=inputPress.key
-            website=hash[x]
-            if (website!=undefined) {
-                window.open('http://'+website,'_blank')
+        document.onkeypress = function(inputPress) {
+            x = inputPress.key
+            website = hash[x]
+            if (website != undefined) {
+                window.open('http://' + website,'_blank')
             } else {
-                console.log(x+x)
-                document.getElementById(x+x).style="background:white;"
-                message.style="color:black;"
-                setTimeout('document.getElementById(x+x).style="background: linear-gradient(45deg, rgba(192,192,192,1) 0%, rgba(0,0,0,1) 62%, rgba(0,0,0,1) 100%);"',100);
+                document.getElementById(x + x).style = "background:white;box-shadow: 0px 0px 0px 1px white,0 0 0 2px white;margin-bottom:4px;vertical-align: bottom;"
+                message.style = "color:black;"
+                setTimeout('document.getElementById(x+x).style="background: linear-gradient(to bottom, #282828 0%,#111111 100%);box-shadow: 0px 0px 0px 1px #1A1B1C,0 0 0 2px #1F2020,0 3px 4px 2px #080808;"',100)
                 setTimeout('message.style="color:transparent;"',2000)
             }
         }

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>我的实用导航</title>
+    <title>快乐学习导航</title>
     <link rel="stylesheet" href="./style.css">
     <style type="text/css">
         .icon {
@@ -16,15 +16,15 @@
 </head>
 <body>
     <header></header>
-    <main style="background-image: url(./img/wallhaven-543865.jpg); background-color: grey;">
+    <main style="background-image: url(./img/wallhaven-653371.jpg); background-color: grey;">
         <div class="wrapper" id="main">
             <div class="promptMessage" id="message">提示：该按键没有被编辑任何网址!!</div> 
         </div>
         <div class="iconWrapper" id="iconWrapper">
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon">
                 <use xlink:href="#icon-3"></use>
             </svg>
-            <div class="iconMessage">
+            <div id="iconMessage" class="iconMessage">
                 "CTRL+空格"即可显示键盘
             </div>
         </div>
@@ -57,17 +57,17 @@
                 }
             }
         }
-        var inputPressCheck=true;
+        var inputPressCheck=false;
         function listenToUser(hash) {
             document.onkeypress = function(inputPress) {
                 if (inputPress.ctrlKey && inputPress.key===' ') {
                     if (inputPressCheck) {
                         document.getElementById('main').style="display:none;"
-                        iconWrapper.style="display:block;"
+                        iconMessage.textContent='"CTRL+空格"即可显示键盘'
                         inputPressCheck=false
                     } else {
                         document.getElementById('main').style="display: inline-block;"
-                        iconWrapper.style="display:none;"
+                        iconMessage.textContent='"CTRL+空格"即可隐藏键盘'
                         inputPressCheck=true
                     }
                 } else {
@@ -77,7 +77,7 @@
                         window.open('http://' + website,'_blank')
                     } else {
                         document.getElementById(x+x).style = "border:1px solid white;background:white;box-shadow: 0px 0px 0px 1px white,0 0 0 2px white;margin-bottom:4px;vertical-align: bottom;"
-                        message.style = "color:black;"
+                        message.style = "color:white;"
                         setTimeout('document.getElementById(x+x).style="border:1px solid #373737;background: linear-gradient(to bottom, #282828 0%,#111111 100%);box-shadow: 0px 0px 0px 1px #1A1B1C,0 0 0 2px #1F2020,0 3px 4px 2px #080808;"',100)
                         setTimeout('message.style="color:transparent;"',2000)
                     }

@@ -16,7 +16,7 @@
 </head>
 <body>
     <header></header>
-    <main style="background-image: url(./img/wall.jpg); background-color: grey;">
+    <main id="wallPicture" style="background-image: url(./img/7.jpg); background-color: grey;">
         <div class="wrapper" id="main">
             <div class="promptMessage" id="message">提示：该按键没有被编辑任何网址!!</div> 
         </div>
@@ -60,6 +60,7 @@
         var inputPressCheck=false;
         function listenToUser(hash) {
             document.onkeypress = function(inputPress) {
+                console.log(inputPress.key)
                 if (inputPress.ctrlKey && inputPress.key===' ') {
                     if (inputPressCheck) {
                         document.getElementById('main').style="display:none;"
@@ -70,6 +71,16 @@
                         iconMessage.textContent='"CTRL+空格"即可隐藏键盘'
                         inputPressCheck=true
                     }
+                } else if (inputPress.key==='=') {
+                    console.log(hash['wallPictureNum'])
+                    if (hash['wallPictureNum']==7) {
+                        hash['wallPictureNum']=1
+                    } else {
+                        hash['wallPictureNum']++
+                    }
+                    wallPicture.style='background-image: url(./img/'+hash['wallPictureNum']+'.jpg); background-color: grey;'
+                    localStorage.setItem('web',JSON.stringify(hash))
+                    console.log(hash['wallPictureNum'])
                 } else {
                     x = inputPress.key
                     var website = hash[x]
@@ -94,18 +105,33 @@
             var hash = {
                 'q':'qq.com',
                 'w':'weibo.com',
-                'y':'yys.163.com/',
-                'x':'x5.qq.com/act/a20180424decennial/index.html?ADTAG=media.buy.baidukeyword.ppc_x5pc_u24337174.k85602435564.a22084836300',
-                'd':'id5.163.com/baidu_mobile_pz/',
-                'g':'www.gamersky.com/',
-                's':'store.steampowered.com/',
-                'b':'www.bh3.com/',
-                'c':'csol.tiancity.com/homepage/v6/',
-                'l':'lol.qq.com'
+                't':'taobao.com',
+                'u':'youtube.com',
+                'i':'iciba.com',
+                'a':'acfun.cn',
+                'd':'javascript.ruanyifeng.com/',
+                'f':'github.com',
+                'h':'google.com',
+                'j':'js.jirengu.com/?html,output',
+                'z':'iconfont.cn/',
+                'x':'xiedaimala.com',
+                'v':'zhihu.com',
+                'b':'bilibili.com',
+                'm':'xuanzebin.github.io/canvas-demo/',
+                'c':'google.com',
+                'wallPictureNum':7,
+                'oldHash':0
             }
             var hashInLocalStorage=getFromLocalStorage('web')
-            if (hashInLocalStorage) {
+            if (hashInLocalStorage==null) hashInLocalStorage={}
+            if (!('oldHash' in hashInLocalStorage)){
+                hash['oldHash']=1
+                localStorage.setItem('web','{}')
+                hashInLocalStorage=getFromLocalStorage('web')
+            }
+            if (JSON.stringify(hashInLocalStorage) != "{}") {
                 hash = hashInLocalStorage
+                wallPicture.style='background-image: url(./img/'+hash['wallPictureNum']+'.jpg); background-color: grey;'
             }
             return {
                 'hash':hash,
